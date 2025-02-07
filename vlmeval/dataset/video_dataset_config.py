@@ -17,6 +17,7 @@ mvbench_dataset = {
 }
 
 videomme_dataset = {
+    'Video-MME_64frame': partial(VideoMME, dataset='Video-MME', nframe=64),
     'Video-MME_8frame': partial(VideoMME, dataset='Video-MME', nframe=8),
     'Video-MME_8frame_subs': partial(VideoMME, dataset='Video-MME', nframe=8, use_subtitle=True),
     'Video-MME_1fps': partial(VideoMME, dataset='Video-MME', fps=1.0),
