@@ -28,6 +28,7 @@ videomme_dataset = {
 longvideobench_dataset = {
     'LongVideoBench_8frame': partial(LongVideoBench, dataset='LongVideoBench', nframe=8),
     'LongVideoBench_8frame_subs': partial(LongVideoBench, dataset='LongVideoBench', nframe=8, use_subtitle=True),
+    'LongVideoBench_64frame': partial(LongVideoBench, dataset='LongVideoBench', nframe=64),
     'LongVideoBench_1fps': partial(LongVideoBench, dataset='LongVideoBench', fps=1.0),
     'LongVideoBench_0.5fps': partial(LongVideoBench, dataset='LongVideoBench', fps=0.5),
     'LongVideoBench_0.5fps_subs': partial(LongVideoBench, dataset='LongVideoBench', fps=0.5, use_subtitle=True)
