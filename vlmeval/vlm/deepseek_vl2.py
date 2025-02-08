@@ -95,6 +95,7 @@ class DeepSeekVL2(BaseModel):
                 return content, images
 
             conversation = []
+            #print(message) ## for video benchmark test
             if 'role' not in message[0]:
                 content, images = prepare_itlist(message)
                 conversation.append(dict(role='<|User|>', content=content, images=images))
@@ -105,7 +106,8 @@ class DeepSeekVL2(BaseModel):
                     content, images = prepare_itlist(msgs['content'])
                     conversation.append(dict(role=role, content=content, images=images))
             conversation.append(dict(role='<|Assistant|>', content=''))
-
+        print(conversation)
+        print("*"*21)
         return conversation
 
     def generate_inner(self, message, dataset=None):
