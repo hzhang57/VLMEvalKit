@@ -7,7 +7,7 @@ from .base import BaseModel
 from ..smp import *
 from ..dataset import DATASET_TYPE
 import copy
-
+import re
 
 class VILA(BaseModel):
     INSTALL_REQ = True
@@ -87,6 +87,9 @@ class VILA(BaseModel):
                 image = Image.open(msg['value']).convert('RGB')
                 images.append(image)
                 content += (self.DEFAULT_IMAGE_TOKEN + '\n')
+
+        ## content: remove question
+        content = re.sub(r'Question:.*?\n', '', content, flags=re.DOTALL)
 
         image_tensor = self.process_images(
             images, self.image_processor,
