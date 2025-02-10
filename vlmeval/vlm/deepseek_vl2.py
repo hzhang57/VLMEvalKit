@@ -5,7 +5,7 @@ import warnings
 from .base import BaseModel
 from ..smp import *
 from PIL import Image
-
+from .delete_question import only_keep_option_RealWorldQA
 
 class DeepSeekVL2(BaseModel):
 
@@ -106,6 +106,7 @@ class DeepSeekVL2(BaseModel):
                     content, images = prepare_itlist(msgs['content'])
                     conversation.append(dict(role=role, content=content, images=images))
             conversation.append(dict(role='<|Assistant|>', content=''))
+        conversation = only_keep_option_RealWorldQA(conversation)
         print(conversation)
         print("*"*21)
         return conversation
