@@ -66,3 +66,4 @@ from .valley import ValleyEagleChat
 from .ross import Ross
 from .ola import Ola
 from .ursa import UrsaChat
+from .delete_question import only_keep_option_RealWorldQA
