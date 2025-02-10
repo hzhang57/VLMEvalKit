@@ -79,6 +79,7 @@ class VILA(BaseModel):
 
         content, images = '', []
 
+        #print(message)
         for msg in message:
             if msg['type'] == 'text':
                 content += msg['value']
@@ -92,6 +93,7 @@ class VILA(BaseModel):
             self.model.config).to(self.model.device, dtype=torch.float16)
 
         # Support interleave text and image
+        print(content)
         conv = self.conv_templates[self.conv_mode].copy()
         conv.append_message(conv.roles[0], content)
         conv.append_message(conv.roles[1], None)
