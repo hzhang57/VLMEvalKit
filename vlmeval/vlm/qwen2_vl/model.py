@@ -187,6 +187,7 @@ class Qwen2VLChat(Qwen2VLPromptMixin, BaseModel):
         if self.verbose:
             print(f'\033[31m{messages}\033[0m')
 
+        print(messages)
         text = self.processor.apply_chat_template([messages], tokenize=False, add_generation_prompt=True)
         images, videos = process_vision_info([messages])
         inputs = self.processor(text=text, images=images, videos=videos, padding=True, return_tensors='pt')
