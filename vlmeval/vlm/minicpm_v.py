@@ -11,6 +11,7 @@ from ..dataset import DATASET_TYPE, DATASET_MODALITY
 
 import re
 
+from .delete_question import only_keep_option_RealWorldQA
 
 class MiniCPM_V(BaseModel):
 
@@ -413,7 +414,6 @@ class MiniCPM_V_2_6(BaseModel):
         else:
             msgs = [dict(type='image', value=tgt_path)]
         msgs.append(dict(type='text', value=prompt))
-
         return msgs
 
     def generate_inner(self, message, dataset=None):
@@ -455,6 +455,8 @@ class MiniCPM_V_2_6(BaseModel):
                         resized_image = image.resize((new_img_width, new_img_height))
                         content.append(resized_image)
         msgs = [{'role': 'user', 'content': content}]
+        msgs = only_keep_option_RealWorldQA(msgs)
+        print(msgs)
 
         res = self.model.chat(
             image=None,
