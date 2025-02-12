@@ -11,7 +11,7 @@ import torch
 from ..base import BaseModel
 from .prompt import Qwen2VLPromptMixin
 from ...smp import get_rank_and_world_size, get_gpu_memory, auto_split_flag
-
+from .delete_question import only_keep_option_RealWorldQA
 
 def ensure_image_url(image: str) -> str:
     prefixes = ['http://', 'https://', 'file://', 'data:image;']
@@ -186,7 +186,8 @@ class Qwen2VLChat(Qwen2VLPromptMixin, BaseModel):
         messages.append({'role': 'user', 'content': self._prepare_content(message, dataset=dataset)})
         if self.verbose:
             print(f'\033[31m{messages}\033[0m')
-
+        
+        messages = only_keep_option_RealWorldQA(messages)       
         print(messages)
         text = self.processor.apply_chat_template([messages], tokenize=False, add_generation_prompt=True)
         images, videos = process_vision_info([messages])
