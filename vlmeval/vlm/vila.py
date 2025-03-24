@@ -7,7 +7,7 @@ from .base import BaseModel
 from ..smp import *
 from ..dataset import DATASET_TYPE
 import copy
-
+import random
 
 class VILA(BaseModel):
     INSTALL_REQ = True
@@ -106,9 +106,21 @@ class VILA(BaseModel):
         keywords = [stop_str]
         stopping_criteria = self.KeywordsStoppingCriteria(keywords, self.tokenizer, input_ids)
 
-        with torch.inference_mode():
-            output_ids = self.model.generate(
-                input_ids, images=image_tensor, stopping_criteria=[stopping_criteria], **self.kwargs)
+        #with torch.inference_mode():
+        #    output_ids = self.model.generate(
+        #        input_ids, images=image_tensor, stopping_criteria=[stopping_criteria], **self.kwargs)
 
-            output = self.tokenizer.batch_decode(output_ids, skip_special_tokens=True)[0].strip()
+        #    output = self.tokenizer.batch_decode(output_ids, skip_special_tokens=True)[0].strip()
+        if "D." in content:
+            options = ['A', "B", "C", "D"]
+        elif "C." in content:
+            options = ['A', "B", "C"]
+        elif "B." in content:
+            options = ['A', "B"]
+        else:
+            options = ['A', "B", "C", "D"]
+
+        res = random.choice(options)
+        print("Radom {} from {}".format(res, options))
+        output = res
         return output
