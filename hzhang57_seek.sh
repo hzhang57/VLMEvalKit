@@ -1,5 +1,5 @@
 #!/bin/bash
-export CUDA_VISIBLE_DEVICES=5
+export CUDA_VISIBLE_DEVICES=7
 
 ### DeepSeek-Vl2-Tiny
 #torchrun --nproc-per-node=1 --master_port 29700 run.py --data RealWorldQA  --model deepseek_vl2_tiny --verbose
